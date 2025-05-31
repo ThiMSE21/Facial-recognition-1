@@ -5,7 +5,7 @@ import json
 import numpy as np
 
 cap = cv2.VideoCapture(0)
-print("[INFO] Mở webcam, nhấn 'c' để chụp khuôn mặt, 'q' để thoát")
+print("[INFO] Open the webcam, press 'c' to capture face, 'q' to exit")
 
 while True:
     ret, frame = cap.read()
@@ -21,7 +21,7 @@ while True:
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
 
         if face_encodings:
-            name = input("Nhập tên cho khuôn mặt này: ")
+            name = input("Enter a name for this face: ")
             encoding_list = face_encodings[0].tolist()
             data = {"name": name, "encoding": encoding_list}
             try:
@@ -29,9 +29,9 @@ while True:
                 print("[INFO]", res.json())
             except Exception as e:
                 print("[ERROR]", e)
-            print("[SUCCESS] Đã lưu khuôn mặt của", name)
+            print("[SUCCESS] Saved: ", name)
         else:
-            print("[WARN] Không tìm thấy khuôn mặt!")
+            print("[WARN] Face not found!")
     elif key == ord("q"):
         break
 

@@ -5,7 +5,7 @@ import pickle
 app = Flask(__name__)
 FACE_DATA_FILE = "known_faces.pkl"
 
-# Load dữ liệu nếu có
+# Load data if available
 if os.path.exists(FACE_DATA_FILE):
     with open(FACE_DATA_FILE, "rb") as f:
         known_faces = pickle.load(f)
@@ -26,7 +26,7 @@ def add_face():
     with open(FACE_DATA_FILE, "wb") as f:
         pickle.dump(known_faces, f)
 
-    return jsonify({"message": f"Đã thêm khuôn mặt cho {name}"}), 200
+    return jsonify({"message": f"Face added for {name}"}), 200
 
 @app.route("/known_faces", methods=["GET"])
 def get_known_faces():
